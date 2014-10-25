@@ -11,11 +11,7 @@
     "modules" : ["cocos2d"],
 
     "jsList" : [
-        "src/resource.js",
-        "src/app.js",
-        "src/AnimationLayer.js",
-        "src/BackgroundLayer.js",
-        "src/PlayScene.js",
-        "src/StatusLayer.js"
+        "./src/AdjustNodeScene.js",
+        "./src/resource.js"
     ]
 }
