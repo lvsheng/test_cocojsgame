@@ -16,11 +16,46 @@
             -khtml-user-select: none;
             -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
         }
+
+        .runner-form {
+            position: fixed;
+            top: 0;
+            padding: 5px 8px;
+            color: white;
+        }
+        .runner-form label {
+            float: left;
+            margin-right: 10px;
+            margin-bottom: 3px;
+        }
+        .runner-form label span {
+            width: 70px;
+            display: inline-block;
+            text-align: right;
+        }
     </style>
 </head>
 <body style="padding:0; margin: 0; background: #000;">
+
 <canvas id="gameCanvas" width="480" height="320"></canvas>
+
+<div ng-app="myApp" ng-controller="myController" class="runner-form">
+    <label
+            ng-repeat="field in [
+            'skewX', 'skewY',
+            'rotation', 'rotationX', 'rotationY',
+            'scale', 'scaleX', 'scaleY'
+            ]"
+            >
+        <span>
+            {{ field }}
+        </span>
+        <input type="number" ng-model="runner[field]"/>
+    </label>
+</div>
+
 <script src="../frameworks/cocos2d-html5/CCBoot.js"></script>
+<script src="./lib/angular.js"></script>
 <script src="main.js"></script>
 </body>
 </html>

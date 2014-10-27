@@ -4,11 +4,28 @@ var AdjustLayer = cc.Layer.extend({
         this.init();
     },
     init:function () {
-        this._super();
+        var self = this;
 
-        var runner = window.runner = new cc.Sprite(res.runner_png);
-        runner.attr({x: 240, y: 160});
-        this.addChild(runner);
+        window.$scope.$apply(function () {
+            self._super();
+
+            var runner =
+                window.runner =
+                    window.$scope.runner =
+                        //new cc.Sprite(res.runner_png);
+                        new cc.Sprite(res.helloBG_png);
+
+            runner.attr({
+                x: 240,
+                y: 160
+            });
+            self.addChild(runner);
+        });
+
+        //为了在控制台中调试时数据实时更新至页面
+        setInterval(function () {
+            $scope.$digest();
+        }, 500);
     }
 });
 
