@@ -1,38 +1,36 @@
 var MenuLayer = cc.Layer.extend({
     ctor : function(){
-        //1. call super class's ctor function
         this._super();
+        this.init();
     },
     init:function(){
-        //call super class's super function
-        this._super();
+        var self = this;
+        self._super();
 
-        //2. get the screen size of your game canvas
         var winsize = cc.director.getWinSize();
-
-        //3. calculate the center point
         var centerpos = cc.p(winsize.width / 2, winsize.height / 2);
 
-        //4. create a background image and set it's position at the center of the screen
         var spritebg = new cc.Sprite(res.helloBG_png);
         spritebg.setPosition(centerpos);
-        this.addChild(spritebg);
+        self.addChild(spritebg);
 
-        //5.
         cc.MenuItemFont.setFontSize(60);
 
-        //6.create a menu and assign onPlay event callback to it
-        var menuItemPlay = cc.MenuItemSprite.create(
+        var menuItemPlay = new cc.MenuItemSprite(
             new cc.Sprite(res.start_n_png), // normal state image
             new cc.Sprite(res.start_s_png), //select state image
-            this.onPlay, this);
-        var menu = new cc.Menu(menuItemPlay);  //7. create the menu
+            null,
+            function () {
+                self._startPlayScene();
+            },
+            null
+        );
+        var menu = new cc.Menu(menuItemPlay);
         menu.setPosition(centerpos);
-        this.addChild(menu);
+        self.addChild(menu);
     },
 
-    onPlay : function(){
-        cc.log("==onplay clicked");
+    _startPlayScene : function(){
         cc.director.runScene(new PlayScene());
     }
 });

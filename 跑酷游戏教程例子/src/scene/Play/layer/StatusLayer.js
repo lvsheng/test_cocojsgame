@@ -1,7 +1,9 @@
 var StatusLayer = cc.Layer.extend({
-    labelCoin:null,
-    labelMeter:null,
-    coins:0,
+    _coins:0,
+    _view: {
+        labelCoin: null,
+        labelMeter: null
+    },
 
     ctor:function () {
         this._super();
@@ -11,15 +13,19 @@ var StatusLayer = cc.Layer.extend({
     init:function () {
         this._super();
 
+        this._initView();
+    },
+
+    _initView: function () {
         var winsize = cc.director.getWinSize();
 
-        this.labelCoin = new cc.LabelTTF("Coins:0", "Helvetica", 20);
-        this.labelCoin.setColor(cc.color(0,0,0));//black color
-        this.labelCoin.setPosition(cc.p(70, winsize.height - 20));
-        this.addChild(this.labelCoin);
+        this._view.labelCoin = new cc.LabelTTF("Coins:0", "Helvetica", 20);
+        this._view.labelCoin.setColor(cc.color(0,0,0));//black color
+        this._view.labelCoin.setPosition(cc.p(70, winsize.height - 20));
+        this.addChild(this._view.labelCoin);
 
-        this.labelMeter = new cc.LabelTTF("0M", "Helvetica", 20);
-        this.labelMeter.setPosition(cc.p(winsize.width - 70, winsize.height - 20));
-        this.addChild(this.labelMeter);
+        this._view.labelMeter = new cc.LabelTTF("0M", "Helvetica", 20);
+        this._view.labelMeter.setPosition(cc.p(winsize.width - 70, winsize.height - 20));
+        this.addChild(this._view.labelMeter);
     }
 });
