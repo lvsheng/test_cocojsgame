@@ -109,7 +109,11 @@ angular.module('myApp', []).controller('myController', function ($scope, $interv
         function EaseElasticOut() {
             var moveAction = new cc.MoveBy(.5, 300, 0);
 
-            runnerSprite.runAction(moveAction.easing(cc.easeElasticOut(.3)));
+            runnerSprite.runAction(new cc.Sequence(
+                new cc.RotateTo(.1, 75),
+                moveAction.easing(cc.easeElasticOut(.3)),
+                new cc.RotateTo(.1, 0)
+            ));
         },
         function EaseBounceOut() {
             var moveAction = new cc.MoveBy(.5, 0, -100);
@@ -128,38 +132,38 @@ angular.module('myApp', []).controller('myController', function ($scope, $interv
             runnerSprite.runAction(moveAction.easing(cc.easeBezierAction(.1, -0.3, 2, 1)));
         }
         /*
-        各种ease曲线：http://www.zhihu.com/question/21981571/answer/19925418
-        ,
+         各种ease曲线：http://www.zhihu.com/question/21981571/answer/19925418
+         ,
          function EaseExponentialIn() {
-            var moveAction = new cc.MoveBy(.5, 300, 0);
+         var moveAction = new cc.MoveBy(.5, 300, 0);
 
-            runnerSprite.runAction(moveAction.easing(cc.easeExponentialIn()));
+         runnerSprite.runAction(moveAction.easing(cc.easeExponentialIn()));
          },
          function easeQuadratic() { //二次方程
-            var moveAction = new cc.MoveBy(.5, 300, 0);
+         var moveAction = new cc.MoveBy(.5, 300, 0);
 
-            runnerSprite.runAction(moveAction.easing(cc.easeQuadraticActionOut()));
-        },
-        function easeQuartic() { //四次方程
-            var moveAction = new cc.MoveBy(.5, 300, 0);
+         runnerSprite.runAction(moveAction.easing(cc.easeQuadraticActionOut()));
+         },
+         function easeQuartic() { //四次方程
+         var moveAction = new cc.MoveBy(.5, 300, 0);
 
-            runnerSprite.runAction(moveAction.easing(cc.easeQuarticActionOut()));
-        },
-        function easeQuintic() { //五次方程
-            var moveAction = new cc.MoveBy(.5, 300, 0);
+         runnerSprite.runAction(moveAction.easing(cc.easeQuarticActionOut()));
+         },
+         function easeQuintic() { //五次方程
+         var moveAction = new cc.MoveBy(.5, 300, 0);
 
-            runnerSprite.runAction(moveAction.easing(cc.easeQuinticActionOut()));
-        },
-        function easeCircle() {
-            var moveAction = new cc.MoveBy(.5, 300, 0);
+         runnerSprite.runAction(moveAction.easing(cc.easeQuinticActionOut()));
+         },
+         function easeCircle() {
+         var moveAction = new cc.MoveBy(.5, 300, 0);
 
-            runnerSprite.runAction(moveAction.easing(cc.easeCircleActionOut()));
-        },
-        function easeCubic() {
-            var moveAction = new cc.MoveBy(.5, 300, 0);
+         runnerSprite.runAction(moveAction.easing(cc.easeCircleActionOut()));
+         },
+         function easeCubic() {
+         var moveAction = new cc.MoveBy(.5, 300, 0);
 
-            runnerSprite.runAction(moveAction.easing(cc.easeCubicActionIn()));
-        }*/
+         runnerSprite.runAction(moveAction.easing(cc.easeCubicActionIn()));
+         }*/
     ];
 
     $scope.runAction = function (srcCode) {

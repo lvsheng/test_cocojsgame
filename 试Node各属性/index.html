@@ -48,7 +48,7 @@
             padding: 5px 10px;
         }
         .attribute-control h5 {
-            margin: 0 0 10px;
+            margin: 0 0 5px;
         }
     </style>
 </head>
@@ -132,33 +132,46 @@
 
     </div>
 
-    <div class="action-src-codes">
-        <div class="button-group">
-            <button
-                    ng-repeat="actionFunction in actionFunctionList"
-                    ng-click="viewData.actionSrcCode = actionFunction.toString();runAction(viewData.actionSrcCode)"
-                    >
-                {{ actionFunction.name || 'action' + $index }}
-            </button>
-        </div>
-        <div class="button-group">
-            <button
-                    ng-repeat="actionFunction in easeFunctionList"
-                    ng-click="viewData.actionSrcCode = actionFunction.toString();runAction(viewData.actionSrcCode)"
-                    >
-                {{ actionFunction.name || 'action' + $index }}
-            </button>
-        </div>
+    <div class="attribute-control action-src-codes" ng-init="viewData.foldActionSrcCodes = true">
+        <h5 ng-click="viewData.foldActionSrcCodes = !viewData.foldActionSrcCodes">
+            动作
+            <span ng-show="viewData.foldActionSrcCodes">-</span>
+            <span ng-show="!viewData.foldActionSrcCodes">+</span>
+        </h5>
+        <div ng-show="viewData.foldActionSrcCodes">
+            <div class="button-group">
+                <button
+                        ng-repeat="actionFunction in actionFunctionList"
+                        ng-click="viewData.actionSrcCode = actionFunction.toString();runAction(viewData.actionSrcCode)"
+                        >
+                    {{ actionFunction.name || 'action' + $index }}
+                </button>
+            </div>
+            <div class="button-group">
+                <button
+                        ng-repeat="actionFunction in easeFunctionList"
+                        ng-click="viewData.actionSrcCode = actionFunction.toString();runAction(viewData.actionSrcCode)"
+                        >
+                    {{ actionFunction.name || 'action' + $index }}
+                </button>
+            </div>
 
-        <button ng-click="placeInitial()"
-                style="display: block;width: 100%;padding: 5px 0;"
-                >
-            复原
-        </button>
+            <button ng-click="placeInitial()"
+                    style="display: block;width: 100%;padding: 5px 0;"
+                    >
+                复原
+            </button>
 
-        <textarea style="width: 100%;box-sizing: border-box;height: 110px;" ng-model="viewData.actionSrcCode"></textarea>
-        <div>
-            <button ng-click="runAction(viewData.actionSrcCode)">Run</button>
+            <h5 ng-click="viewData.foldSrcInput = !viewData.foldSrcInput">
+                <span ng-show="viewData.foldSrcInput">-</span>
+                <span ng-show="!viewData.foldSrcInput">+</span>
+            </h5>
+            <div ng-show="viewData.foldSrcInput">
+                <textarea style="width: 100%;box-sizing: border-box;height: 110px;" ng-model="viewData.actionSrcCode"></textarea>
+                <div>
+                    <button ng-click="runAction(viewData.actionSrcCode)">Run</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
