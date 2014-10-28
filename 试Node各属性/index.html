@@ -16,22 +16,39 @@
             -khtml-user-select: none;
             -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
         }
+        .clear:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        [ng-click] {
+            cursor: pointer;
+        }
 
-        .runner-form {
+        .control-area {
             position: fixed;
             top: 0;
             padding: 5px 8px;
             color: white;
+            opacity: 0.6;
+            background: black;
         }
-        .runner-form label {
+        .control-area label {
             float: left;
             margin-right: 10px;
             margin-bottom: 3px;
         }
-        .runner-form label span {
+        .control-area label span {
             width: 70px;
             display: inline-block;
             text-align: right;
+        }
+
+        .attribute-control {
+            padding: 5px 10px;
+        }
+        .attribute-control h5 {
+            margin: 0 0 10px;
         }
     </style>
 </head>
@@ -39,19 +56,102 @@
 
 <canvas id="gameCanvas" width="480" height="320"></canvas>
 
-<div ng-app="myApp" ng-controller="myController" class="runner-form">
-    <label
-            ng-repeat="field in [
-            'skewX', 'skewY',
-            'rotation', 'rotationX', 'rotationY',
-            'scale', 'scaleX', 'scaleY'
-            ]"
-            >
-        <span>
-            {{ field }}
-        </span>
-        <input type="number" ng-model="runner[field]"/>
-    </label>
+<div ng-app="myApp" ng-controller="myController" class="control-area" ng-init="viewData = {}">
+    <div class="clear attribute-control">
+        <h5 ng-click="viewData.foldBackgroundSpriteFormControls = !viewData.foldBackgroundSpriteFormControls">
+            backgroundSprite
+            <span ng-show="viewData.foldBackgroundSpriteFormControls">-</span>
+            <span ng-show="!viewData.foldBackgroundSpriteFormControls">+</span>
+        </h5>
+
+        <div class="form-controls" ng-show="viewData.foldBackgroundSpriteFormControls">
+            <label
+                    ng-repeat="field in [
+                    'anchorX', 'anchorY',
+                    'x', 'y',
+                    'width', 'height',
+                    'skewX', 'skewY',
+                    'rotation', 'rotationX', 'rotationY',
+                    'scale', 'scaleX', 'scaleY'
+                  ]"
+                    >
+                <span>
+                    {{ field }}
+                </span>
+                <input type="number" ng-model="backgroundSprite[field]"/>
+            </label>
+
+            <label
+                    ng-repeat="field in [
+                    'flippedX', 'flippedY'
+                  ]"
+                    >
+                <span>
+                    {{ field }}
+                </span>
+                <input type="checkbox" ng-model="backgroundSprite[field]"/>
+            </label>
+        </div>
+    </div>
+
+    <div class="clear attribute-control">
+        <h5 ng-click="viewData.foldRunnerSpriteFormControls = !viewData.foldRunnerSpriteFormControls">
+            runnerSprite (in backgroundSprite)
+            <span ng-show="viewData.foldRunnerSpriteFormControls">-</span>
+            <span ng-show="!viewData.foldRunnerSpriteFormControls">+</span>
+        </h5>
+
+        <div class="form-controls" ng-show="viewData.foldRunnerSpriteFormControls">
+            <label
+                    ng-repeat="field in [
+                    'anchorX', 'anchorY',
+                    'x', 'y',
+                    'width', 'height',
+                    'skewX', 'skewY',
+                    'rotation', 'rotationX', 'rotationY',
+                    'scale', 'scaleX', 'scaleY'
+                  ]"
+                    >
+                <span>
+                    {{ field }}
+                </span>
+                <input type="number" ng-model="runnerSprite[field]"/>
+            </label>
+
+            <label
+                    ng-repeat="field in [
+                'flippedX', 'flippedY'
+              ]"
+                    >
+                <span>
+                    {{ field }}
+                </span>
+                <input type="checkbox" ng-model="runnerSprite[field]"/>
+            </label>
+        </div>
+
+    </div>
+
+    <div class="action-src-codes">
+        <div class="button-group">
+            <button
+                    ng-repeat="actionFunction in actionFunctionList"
+                    ng-click="viewData.actionSrcCode = actionFunction.toString();runAction(viewData.actionSrcCode)"
+                    >
+                {{ actionFunction.name || 'action' + $index }}
+            </button>
+        </div>
+        <button ng-click="placeInitial()"
+                style="display: block;width: 100%;padding: 5px 0;"
+                >
+            复原
+        </button>
+
+        <textarea style="width: 100%;box-sizing: border-box;height: 110px;" ng-model="viewData.actionSrcCode"></textarea>
+        <div>
+            <button ng-click="runAction(viewData.actionSrcCode)">Run</button>
+        </div>
+    </div>
 </div>
 
 <script src="../frameworks/cocos2d-html5/CCBoot.js"></script>

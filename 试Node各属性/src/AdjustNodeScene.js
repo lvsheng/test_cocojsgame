@@ -9,29 +9,38 @@ var AdjustLayer = cc.Layer.extend({
         window.$scope.$apply(function () {
             self._super();
 
-            var runner =
-                window.runner =
-                    window.$scope.runner =
-                        //new cc.Sprite(res.runner_png);
+            var backgroundSprite =
+                window.backgroundSprite =
+                    window.$scope.backgroundSprite =
                         new cc.Sprite(res.helloBG_png);
-
-            runner.attr({
+            backgroundSprite.attr({
                 x: 240,
+                y: 160,
+                scale: 0.5
+            });
+            self.addChild(backgroundSprite);
+
+            var runnerSprite =
+                window.runnerSprite =
+                    window.$scope.runnerSprite =
+                        new cc.Sprite(res.runner_png);
+            runnerSprite.attr({
+                x: 20,
                 y: 160
             });
-            self.addChild(runner);
+            backgroundSprite.addChild(runnerSprite);
         });
-
-        //为了在控制台中调试时数据实时更新至页面
-        setInterval(function () {
-            $scope.$digest();
-        }, 500);
     }
 });
 
 var AdjustNodeScene = cc.Scene.extend({
     onEnter:function () {
         this._super();
-        this.addChild(new AdjustLayer());
+
+        var layer =
+            window.layer =
+                window.$scope.layer =
+                    new AdjustLayer();
+        this.addChild(layer);
     }
 });
