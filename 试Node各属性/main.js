@@ -83,15 +83,9 @@ angular.module('myApp', []).controller('myController', function ($scope, $interv
                     3
                 )
             );
-        },
-
-        function speed () {
-            var moveAction = new cc.MoveBy(.5, 300, 0);
-
-            var speedAction = new cc.Speed(moveAction, 2);
-            runnerSprite.runAction(speedAction);
-        },
-
+        }
+    ];
+    $scope.easeFunctionList = [
         function easeIn () {
             var moveAction = new cc.MoveBy(.5, 300, 0);
 

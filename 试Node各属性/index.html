@@ -141,6 +141,15 @@
                 {{ actionFunction.name || 'action' + $index }}
             </button>
         </div>
+        <div class="button-group">
+            <button
+                    ng-repeat="actionFunction in easeFunctionList"
+                    ng-click="viewData.actionSrcCode = actionFunction.toString();runAction(viewData.actionSrcCode)"
+                    >
+                {{ actionFunction.name || 'action' + $index }}
+            </button>
+        </div>
+
         <button ng-click="placeInitial()"
                 style="display: block;width: 100%;padding: 5px 0;"
                 >
