@@ -33,15 +33,6 @@ var MenuLayer = cc.Layer.extend({
 
     onPlay : function(){
         cc.log("==onplay clicked");
-        cc.director.runScene(new AdjustNodeScene());
-    }
-});
-
-var MenuScene = cc.Scene.extend({
-    onEnter:function () {
-        this._super();
-        var layer = new MenuLayer();
-        layer.init();
-        this.addChild(layer);
+        cc.director.runScene(new PlayScene());
     }
 });
