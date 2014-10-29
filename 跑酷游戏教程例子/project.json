@@ -11,7 +11,6 @@
     "modules" : ["cocos2d","chipmunk"],
 
     "jsList" : [
-        "src/globalConf.js",
         "src/resource.js",
         "src/util/index.js",
         "src/util/createAnimationWithPlistFileName.js",

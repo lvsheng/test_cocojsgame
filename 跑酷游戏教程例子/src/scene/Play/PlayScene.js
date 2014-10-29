@@ -12,7 +12,10 @@ var PlayScene = cc.Scene.extend({
         self.addChild(animationLayer);
         self.addChild(new StatusLayer());
 
-        window.animationLayer = animationLayer;
+        //TODO:for debug:
+        window.animationLayer = $scope.animationLayer = animationLayer;
+        window.runnerSprite = $scope.runnerSprite = animationLayer._runner;
+        window.runnerBody = $scope.runnerBody = runnerSprite.body;
 
         self.scheduleUpdate();
     },
@@ -31,8 +34,12 @@ var PlayScene = cc.Scene.extend({
             self._space.staticBody,
             cp.v(0, g_groundHight),
             cp.v(MAX_INT, g_groundHight),
-            200 //厚度为0
+            10 //厚度为0
         );
         self._space.addStaticShape(ground);
+
+        //TODO: for debug
+        window.space = $scope.space = self._space;
+        window.ground = $scope.ground = ground;
     }
 });

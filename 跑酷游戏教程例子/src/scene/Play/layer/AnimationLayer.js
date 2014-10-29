@@ -33,7 +33,7 @@ var AnimationLayer = cc.Layer.extend({
             cp.momentForBox(M_RUNNER, runner.getContentSize().width, runner.getContentSize().height)
         );
         runnerBody.p = cp.v(g_runnerStartX, g_groundHight + runner.getContentSize().height / 2);
-        runnerBody.applyImpulse(cp.v(150, 0), cp.v(0, 0));
+        runnerBody.applyImpulse(cp.v(15, 0), cp.v(0, 0));
         self._space.addBody(runnerBody);
 
         //shape
