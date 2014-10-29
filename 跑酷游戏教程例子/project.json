@@ -8,9 +8,10 @@
     "renderMode" : 0,
     "engineDir":"../frameworks/cocos2d-html5",
 
-    "modules" : ["cocos2d"],
+    "modules" : ["cocos2d","chipmunk"],
 
     "jsList" : [
+        "src/globalConf.js",
         "src/resource.js",
         "src/util/index.js",
         "src/util/createAnimationWithPlistFileName.js",
