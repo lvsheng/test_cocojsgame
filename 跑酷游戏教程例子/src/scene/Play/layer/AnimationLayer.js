@@ -26,5 +26,9 @@ var AnimationLayer = cc.Layer.extend({
         var runningAnimation = myUtil.createAnimationWithPlistFileName(res.running_plist, 0.1);
         var runningAnimateAction = new cc.RepeatForever(new cc.Animate(runningAnimation));
         self._view.runner.runAction(runningAnimateAction);
+        self._view.runner.schedule(function () {
+            self._view.runner.stopAction(runningAnimateAction);
+        }, null, null,.7);
+        self._view.runner.stopAction()
     }
 });
