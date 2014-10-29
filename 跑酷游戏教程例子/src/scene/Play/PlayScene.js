@@ -32,9 +32,9 @@ var PlayScene = cc.Scene.extend({
         //set up walls
         var ground = new cp.SegmentShape(
             self._space.staticBody,
-            cp.v(0, g_groundHight),
-            cp.v(MAX_INT, g_groundHight),
-            10 //厚度为0
+            cp.v(0, g_groundHight), //起始点
+            cp.v(MAX_INT, g_groundHight), //结束点
+            0 //厚度
         );
         self._space.addStaticShape(ground);
 
