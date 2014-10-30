@@ -1,4 +1,7 @@
 var BackgroundLayer = cc.Layer.extend({
+    _map0: null,
+    _map1: null,
+
     ctor:function () {
         this._super();
         this.init();
@@ -11,13 +14,15 @@ var BackgroundLayer = cc.Layer.extend({
     },
 
     _initView: function () {
+        var self = this;
+        window.layer = self;
         var winsize = cc.director.getWinSize();
         var centerPos = cc.p(winsize.width / 2, winsize.height / 2);
 
-        //create the background image and position it at the center of screen
-        var spriteBG = new cc.Sprite(res.PlayBG_png);
-        spriteBG.setPosition(centerPos);
-
-        this.addChild(spriteBG);
+        self._map0 = new cc.TMXTiledMap(res.map0_tmx);
+        self.addChild(self._map0);
+        self._map1 = new cc.TMXTiledMap(res.map1_tmx);
+        self._map1.setPosition(cc.p(self._map0.getContentSize().width, 0));
+        self.addChild(self._map1);
     }
 });
