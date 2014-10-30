@@ -97,6 +97,15 @@
                 <input ng-model="runnerBody.vy" type="number"/>
             </label>
 
+            <label>
+                verts(body.shapeList[0].verts):
+                <br/>
+                <input
+                        ng-repeat="vert in runnerBody.shapeList[0].verts track by $index"
+                        ng-model="runnerBody.shapeList[0].verts[$index]"
+                        type="number"/>
+            </label>
+
 
             <label>
                 debugNode
