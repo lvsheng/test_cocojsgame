@@ -507,6 +507,13 @@ cc._tmp.WebGLSprite = function () {
 
         if (locTexture) {
             if (locTexture._isLoaded) {
+                //by lvsheng: 是CCGLProgram实例。对精灵的绘制就是在这个use方法。
+                // 而use方法里用webGl的context实例(cc._renderContext，对应页面中canvas)的useProgram调用_t._shaderProgram._programObj实例，
+                // 而_t._shaderProgram._programObj是在初始化方法中使用_t._shaderProgram的构造函数传入的参数作为着色器修饰（compile，参见CCGLProgram.js中initWithVertexShaderByteArray方法）
+                // 所以这里use里发生了什么，是由_shaderProgram构造时传入的着色器相关参数决定的
+                // 而找了好久，没找到对_shaderProgram的赋值，也没找到调用setShaderProgram(Node中定义的方法)的地方。后来浏览器中打断点发现，是直接给shaderProgram这个虚拟属性赋值触发了setShaderProgram的调用（应该是用了Object.observe接口~）
+                // 在SpriteWebGl.js中_p.setTexture方法中赋的值
+                // 再追究一下，是在shaders/CCShaderCache里类似SHADER_POSITION_TEXTURE_COLOR_VERT这些地方定义了常量
                 _t._shaderProgram.use();
                 _t._shaderProgram.setUniformForModelViewAndProjectionMatrixWithMat4();
 
