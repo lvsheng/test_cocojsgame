@@ -83,6 +83,10 @@ angular.module('myApp', []).controller('myController', function ($scope, $interv
                     3
                 )
             );
+        },
+        function liquid () {
+            var action = new cc.Liquid(3, cc.size(10, 10), 5, 3);
+            backgroundSprite.runAction(action);
         }
     ];
     $scope.easeFunctionList = [

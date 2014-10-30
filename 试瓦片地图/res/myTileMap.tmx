@@ -13,6 +13,11 @@
    eJzt10EKgEAMBMGY/z/akyDCQi6uI1TBvKDJIV1VfRvf6tIjkR5Z9MiiRxY9suiRRY8semS5ehyD8b7pfeixx/NPX02PPfT4Jz2y6AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADBzAkFMAGs=
   </data>
  </layer>
+ <layer name="复制 块层 1" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt10EKgEAMBMGY/z/akyDCQi6uI1TBvKDJIV1VfRvf6tIjkR5Z9MiiRxY9suiRRY8semS5ehyD8b7pfeixx/NPX02PPfT4Jz2y6AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADBzAkFMAGs=
+  </data>
+ </layer>
  <objectgroup name="对象层 1">
   <object name="p1" x="107" y="16"/>
   <object name="p2" x="109" y="369"/>
