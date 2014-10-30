@@ -19,9 +19,9 @@ var BackgroundLayer = cc.Layer.extend({
         var winsize = cc.director.getWinSize();
         var centerPos = cc.p(winsize.width / 2, winsize.height / 2);
 
-        self._map0 = new cc.TMXTiledMap(res.map0_tmx);
+        self._map0 = new cc.TMXTiledMap(res.map00_tmx);
         self.addChild(self._map0);
-        self._map1 = new cc.TMXTiledMap(res.map1_tmx);
+        self._map1 = new cc.TMXTiledMap(res.map01_tmx);
         self._map1.setPosition(cc.p(self._map0.getContentSize().width, 0));
         self.addChild(self._map1);
     }

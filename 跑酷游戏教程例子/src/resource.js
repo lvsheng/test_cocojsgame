@@ -6,8 +6,9 @@ var res = {
     runner_png: "res/runner.png",
     running_png: "res/running.png",
     running_plist: "res/running.plist",
-    map0_tmx: "res/map00.tmx",
-    map1_tmx: "res/map01.tmx"
+    map_png: "res/map.png",
+    map00_tmx: "res/map00.tmx",
+    map01_tmx: "res/map01.tmx"
 };
 
 var g_resources = [];
