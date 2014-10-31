@@ -1,0 +1,24 @@
+{
+    "project_type": "javascript",
+
+    "debugMode" : 1,
+    "showFPS" : false,
+    "frameRate" : 60,
+    "id" : "gameCanvas",
+    "renderMode" : 0,
+    "engineDir":"../frameworks/cocos2d-html5",
+
+    "modules" : ["cocos2d","chipmunk"],
+
+    "jsList" : [
+        "src/resource.js",
+        "src/util/index.js",
+        "src/util/createAnimationWithPlistFileName.js",
+        "src/scene/Menu/Layer/MenuLayer.js",
+        "src/scene/Menu/MenuScene.js",
+        "src/scene/Play/layer/AnimationLayer.js",
+        "src/scene/Play/layer/BackgroundLayer.js",
+        "src/scene/Play/layer/StatusLayer.js",
+        "src/scene/Play/PlayScene.js"
+    ]
+}
