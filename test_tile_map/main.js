@@ -1,22 +1,24 @@
 angular.module('myApp', []).controller('myController', function ($scope, $interval) {
-    cc.game.onStart = function() {
+    cc.game.onStart = function(){
         cc.view.setDesignResolutionSize(480, 320, cc.ResolutionPolicy.SHOW_ALL);
         cc.view.resizeWithBrowserSize(true);
+        //load resources
+        cc.LoaderScene.preload(g_resources, function () {
+            var scene = new PlayScene();
+            cc.director.runScene(scene);
 
-        var scene =
-            window.scene =
-                $scope.scene =
-                    new AdjustNodeScene();
-        cc.director.runScene(scene);
-
-        window.$scope = $scope;
+            //为了在控制台中调试时数据实时更新至页面
+            scene.schedule(function () {
+                $scope.$digest();
+            },.5);
+        }, this);
     };
     cc.game.run();
 
-    //为了在控制台中调试时数据实时更新至页面
-    $interval(function () {}, 500);
+    //TODO: for debug
+    window.$scope = $scope;
 
-    window.initialRunnerPosition = {x:20,y:160};
+    window.initialRunnerPosition = {x:g_runnerStartX,y:g_groundHight + 29};
     $scope.placeInitial = function () {
         runnerSprite.setPosition(initialRunnerPosition);
         runnerSprite.flippedX = false;
@@ -65,7 +67,7 @@ angular.module('myApp', []).controller('myController', function ($scope, $interv
             ));
         },
         function tint () {
-            backgroundSprite.runAction(new cc.Sequence(
+            runnerSprite.runAction(new cc.Sequence(
                 new cc.TintTo(.5, 255, 0, 0),
                 new cc.TintTo(1.5, 255, 255, 255)
             ));
@@ -101,11 +103,6 @@ angular.module('myApp', []).controller('myController', function ($scope, $interv
 
             runnerSprite.runAction(moveAction.easing(cc.easeInOut(10)));
         },
-        function EaseSineIn () {
-            var moveAction = new cc.MoveBy(.5, 300, 0);
-
-            runnerSprite.runAction(moveAction.easing(cc.easeSineIn()));
-        },
         function EaseElasticOut() {
             var moveAction = new cc.MoveBy(.5, 300, 0);
 
@@ -116,7 +113,7 @@ angular.module('myApp', []).controller('myController', function ($scope, $interv
             ));
         },
         function EaseBounceOut() {
-            var moveAction = new cc.MoveBy(.5, 0, -100);
+            var moveAction = new cc.MoveBy(.5, 0, -50);
 
             runnerSprite.runAction(moveAction.easing(cc.easeBounceOut()));
         },
@@ -131,39 +128,6 @@ angular.module('myApp', []).controller('myController', function ($scope, $interv
             //传入四个点（1为单位长度，各点貌似是在中途设置一些中间点）
             runnerSprite.runAction(moveAction.easing(cc.easeBezierAction(.1, -0.3, 2, 1)));
         }
-        /*
-         各种ease曲线：http://www.zhihu.com/question/21981571/answer/19925418
-         ,
-         function EaseExponentialIn() {
-         var moveAction = new cc.MoveBy(.5, 300, 0);
-
-         runnerSprite.runAction(moveAction.easing(cc.easeExponentialIn()));
-         },
-         function easeQuadratic() { //二次方程
-         var moveAction = new cc.MoveBy(.5, 300, 0);
-
-         runnerSprite.runAction(moveAction.easing(cc.easeQuadraticActionOut()));
-         },
-         function easeQuartic() { //四次方程
-         var moveAction = new cc.MoveBy(.5, 300, 0);
-
-         runnerSprite.runAction(moveAction.easing(cc.easeQuarticActionOut()));
-         },
-         function easeQuintic() { //五次方程
-         var moveAction = new cc.MoveBy(.5, 300, 0);
-
-         runnerSprite.runAction(moveAction.easing(cc.easeQuinticActionOut()));
-         },
-         function easeCircle() {
-         var moveAction = new cc.MoveBy(.5, 300, 0);
-
-         runnerSprite.runAction(moveAction.easing(cc.easeCircleActionOut()));
-         },
-         function easeCubic() {
-         var moveAction = new cc.MoveBy(.5, 300, 0);
-
-         runnerSprite.runAction(moveAction.easing(cc.easeCubicActionIn()));
-         }*/
     ];
 
     $scope.runAction = function (srcCode) {
